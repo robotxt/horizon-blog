@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+    web:
+        build: .
+        command: bash -c "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8080"
+        env_file: .env
+        volumes:
+            - ./app:/app
+        ports:
+            - "8080:8080"
+        depends_on:
+            - db
+        tty: true
+        stdin_open: true
+
+    db:
+        image: postgres:15.3-alpine
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_HOST_AUTH_METHOD: trust
+            POSTGRES_USER: root
+            POSTGRES_PASSWORD: rootpassword
+            POSTGRES_DB: blog 
+
+        healthcheck:
+            test: ["CMD", "pg_isready", "-q", "-d", "blog", "-U", "root"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
