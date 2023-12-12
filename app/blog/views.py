@@ -10,7 +10,9 @@ class BlogView(ListView):
 
     def get_queryset(self):
         now_date = timezone.now()
-        queryset = Blog.objects.filter(published_date__lte=now_date)
+
+        # added a filter to display only blogs that are in previous dates
+        queryset = Blog.objects.filter(published_date__lte=now_date).order_by("-published_date")
         return queryset
 
 
