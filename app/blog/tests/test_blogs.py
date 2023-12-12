@@ -36,8 +36,8 @@ class TestAuthAPI(TestCase):
 
         self.assertEqual(200, response.status_code)
 
-        # test blog response order
-        default_order = [self.blog_two.title, self.blog_one.title]
+        # test blog response order and titles
+        default_order = [self.blog_two.title, self.blog_one.title]  # default blog order base on published date
         blogs = response.context["blogs"]
         result_order = [blogs[0].title, blogs[1].title]
         self.assertEqual(default_order, result_order)
