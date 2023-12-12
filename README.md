@@ -38,6 +38,8 @@ Visit Page:
 
 `http://localhost:8080/admin/`
 
+
+Note: python commands should be run inside the docker container
 ### Create Super User
 
 ```bash
