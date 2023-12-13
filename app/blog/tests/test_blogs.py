@@ -9,7 +9,7 @@ from django.urls import reverse
 logger = logging.getLogger(__name__)
 
 
-class TestAuthAPI(TestCase):
+class TestBlogViews(TestCase):
 
     def setUp(self) -> None:
         now_date = timezone.now()
@@ -28,7 +28,7 @@ class TestAuthAPI(TestCase):
             published_date=now_date
         )
 
-    def test_valid_login(self):
+    def test_blogs_list(self):
         client = Client()
         response = client.get(
             reverse("blogs_page"),
